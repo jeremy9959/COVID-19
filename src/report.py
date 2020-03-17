@@ -22,9 +22,11 @@ cases.index.name='Date'
 cases = cases/100
 source = ColumnDataSource(cases)
 recent_US = np.log(cases['US'][datetime.date.today()-datetime.timedelta(days=8):])
+recent_Italy = np.log(cases['Italy'][datetime.date.today()-datetime.timedelta(days=8):])
 L = LinearRegression().fit(np.array(range(len(recent_US))).reshape(-1,1),recent_US)
+L1 = LinearRegression().fit(np.array(range(len(recent_Italy))).reshape(-1,1),recent_Italy)
 percent_rate = 100*(np.exp(L.coef_)-1)[0]
-
+percent_rate_Italy = 100*(np.exp(L1.coef_)-1)[0]
 F = figure(width=600,height=600,x_axis_type='datetime',y_axis_type='log',y_range=(.1,2000),x_range=(datetime.datetime(2020,2,1),datetime.datetime(2020,4,1)))
 
 
@@ -36,6 +38,7 @@ F.line(x='Date',y='China',source=source,line_width=3,color='orange',legend_label
 F.line(x='Date',y='total',color='black',line_width=3,line_dash='dashed',source=source,legend_label='World')
 F.title.text = "COVID-19 Confirmed Cases (https://github.com/CSSEGISandData/COVID-19)"
 F.add_layout(Label(text_font_style='bold',text_font_size="10pt",x=300,y=100,x_units='screen',y_units='screen',text='US Daily Growth Rate: {:.0f} %'.format(percent_rate)))
+F.add_layout(Label(text_font_style='bold',text_font_size="10pt",x=300,y=85,x_units='screen',y_units='screen',text='Italy Daily Growth Rate: {:.0f} %'.format(percent_rate_Italy)))
 F.yaxis.axis_label = "100's of cases (log scale)"
 F.xaxis.axis_label="Date"
 F.background_fill_color="#EEEEEE"
