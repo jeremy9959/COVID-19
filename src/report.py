@@ -37,7 +37,10 @@ F.line(x='Date',y='China',source=source,line_width=3,color='orange',legend_label
 #F.line(x='Date',y='predicted',color='red',line_width=3,source=source,line_dash='dotted')
 F.line(x='Date',y='total',color='black',line_width=3,line_dash='dashed',source=source,legend_label='World')
 F.title.text = "COVID-19 Confirmed Cases (https://github.com/CSSEGISandData/COVID-19)"
-F.add_layout(Label(text_font_style='bold',text_font_size="10pt",x=300,y=100,x_units='screen',y_units='screen',text='US Daily Growth Rate: {:.0f} %'.format(percent_rate)))
+
+F.add_layout(Label(text_font_style='bold',text_font_size="10pt",x=300,y=100,x_units='screen',y_units='screen',text='USDaily Growth Rate: {:.0f} %'.format(percent_rate)))
+F.legend.location='bottom_left'
+F.legend.background_fill_alpha=0.0
 F.add_layout(Label(text_font_style='bold',text_font_size="10pt",x=300,y=85,x_units='screen',y_units='screen',text='Italy Daily Growth Rate: {:.0f} %'.format(percent_rate_Italy)))
 F.yaxis.axis_label = "100's of cases (log scale)"
 F.xaxis.axis_label="Date"
